@@ -8,6 +8,12 @@
   <body>
     <header>
       <h1>Room Reservation</h1>
+      <!-- User Authentication Links -->
+      <div class="auth-links">
+        <a href="/login/">Log In</a>
+        <span> | </span>
+        <a href="/signup/">Sign Up</a>
+      </div>
     </header>
     <main>
       <div class="room-selection">
@@ -63,9 +69,8 @@
           "9:00 AM": "Occupied",
           "10:00 AM": "Available",
           "11:00 AM": "Available",
-          // Add availability status for other time slots
+          // Add availability status for other rooms and time slots
         },
-        // Add availability status for other rooms and time slots
       };
 
       // Function to update availability status based on room and time selection
