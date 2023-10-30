@@ -12,15 +12,110 @@
     <main>
       <div class="room-selection">
         <h2>Select a Room</h2>
-        <!-- Room selection form goes here -->
+        <form id="room-selection-form">
+          <label for="room-select">Room:</label>
+          <select id="room-select" name="room">
+            <option value="room-1">Room 1</option>
+            <option value="room-2">Room 2</option>
+            <option value="room-3">Room 3</option>
+            <!-- Add more options as needed -->
+          </select>
+          <p id="availability-status"></p>
+          <button type="submit">Select Room</button>
+        </form>
       </div>
       <div class="room-reservation">
         <h2>Reserve a Room</h2>
-        <!-- Reservation form goes here -->
+        <form id="reservation-form">
+          <label for="reservation-date">Date:</label>
+          <input type="date" id="reservation-date" name="date" required />
+          <label for="reservation-time">Time:</label>
+          <select id="reservation-time" name="time">
+            <option value="9:00 AM">9:00 AM</option>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <!-- Add more time slots as needed -->
+          </select>
+          <button type="submit">Reserve</button>
+        </form>
+        <div id="reservation-result"></div>
       </div>
     </main>
     <footer>
       <p>&copy; 2023 Roommate App</p>
     </footer>
+
+    <script>
+      const roomAvailability = {
+        "room-1": {
+          "9:00 AM": "Available",
+          "10:00 AM": "Occupied",
+          "11:00 AM": "Available",
+          // Add availability status for other time slots
+        },
+        "room-2": {
+          "9:00 AM": "Available",
+          "10:00 AM": "Available",
+          "11:00 AM": "Occupied",
+          // Add availability status for other time slots
+        },
+        "room-3": {
+          "9:00 AM": "Occupied",
+          "10:00 AM": "Available",
+          "11:00 AM": "Available",
+          // Add availability status for other time slots
+        },
+        // Add availability status for other rooms and time slots
+      };
+
+      // Function to update availability status based on room and time selection
+      function updateAvailabilityStatus() {
+        const selectedRoom = document.getElementById("room-select").value;
+        const selectedTime = document.getElementById("reservation-time").value;
+
+        const availabilityStatus = roomAvailability[selectedRoom]
+          ? roomAvailability[selectedRoom][selectedTime] || "Unknown"
+          : "Unknown";
+        document.getElementById(
+          "availability-status"
+        ).textContent = `Status: ${availabilityStatus}`;
+      }
+
+      // Add an event listener to update availability status when the room or time is selected
+      document
+        .getElementById("room-select")
+        .addEventListener("change", updateAvailabilityStatus);
+      document
+        .getElementById("reservation-time")
+        .addEventListener("change", updateAvailabilityStatus);
+
+      // JavaScript code for handling form submissions
+      document
+        .getElementById("room-selection-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          // Handle room selection form submission
+          const selectedRoom = document.getElementById("room-select").value;
+          // Implement your logic to process the selected room
+        });
+
+      document
+        .getElementById("reservation-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          // Handle room reservation form submission
+          const selectedDate =
+            document.getElementById("reservation-date").value;
+          const selectedTime =
+            document.getElementById("reservation-time").value;
+          // Implement your logic to make a reservation
+          // Display the result in the 'reservation-result' element
+          const resultElement = document.getElementById("reservation-result");
+          resultElement.textContent = `Reservation confirmed for ${selectedDate} at ${selectedTime}`;
+        });
+
+      // Initial update of availability status
+      updateAvailabilityStatus();
+    </script>
   </body>
 </html>
