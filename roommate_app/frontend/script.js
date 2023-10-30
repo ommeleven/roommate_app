@@ -41,16 +41,30 @@ document.getElementById('room-selection-form').addEventListener('submit', functi
     // Implement your logic to process the selected room
 });
 
+// JavaScript code for handling form submissions
 document.getElementById('reservation-form').addEventListener('submit', function (e) {
     e.preventDefault();
-    // Handle room reservation form submission
+
     const selectedDate = document.getElementById('reservation-date').value;
     const selectedTime = document.getElementById('reservation-time').value;
-    // Implement your logic to make a reservation
-    // Display the result in the 'reservation-result' element
-    const resultElement = document.getElementById('reservation-result');
-    resultElement.textContent = `Reservation confirmed for ${selectedDate} at ${selectedTime}`;
+
+    // Get the current date and time
+    const currentDate = new Date();
+    const selectedDateTime = new Date(selectedDate + ' ' + selectedTime);
+
+    if (selectedDateTime < currentDate) {
+        // Reservation date is in the past, show an error message
+        const resultElement = document.getElementById('reservation-result');
+        resultElement.textContent = 'Error: Please select a future date and time for your reservation.';
+    } else {
+        // Reservation date is in the future, proceed with the reservation logic
+        const resultElement = document.getElementById('reservation-result');
+        resultElement.textContent = `Reservation confirmed for ${selectedDate} at ${selectedTime}`;
+        // Implement your logic to make a reservation
+        // This is where you would send the reservation data to your server, etc.
+    }
 });
+
 
 // Initial update of availability status
 updateAvailabilityStatus();
