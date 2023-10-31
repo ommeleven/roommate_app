@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 from roommate_app.backend.models import UserProfile
 
 def register_user(username, email, password):
